@@ -1,0 +1,24 @@
+.pagination {
+  .page-link {
+    color: #757575;
+    border-radius: $border-radius;
+  }
+}
+
+.page-item {
+  margin: 0 3px;
+
+  &:first-child .page-link {
+    border-radius: $border-radius;
+  }
+
+  &.active .page-link {
+    border-color: #757575;
+    background-color: #757575;
+  }
+
+
+  a {
+    padding: 5px 10px;
+  }
+}

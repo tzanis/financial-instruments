@@ -1,0 +1,11 @@
+// Include variables
+@import 'variables';
+
+// Base styles.
+@import 'base';
+@import 'paginations';
+
+// Component Styles.
+@import 'node_modules/react-datepicker/src/stylesheets/datepicker.scss';
+@import 'filters';
+@import 'table';

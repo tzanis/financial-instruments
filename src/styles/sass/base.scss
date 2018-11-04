@@ -1,0 +1,32 @@
+body {
+  background: $background-color;
+  font-size: 14px;
+}
+
+h1 {
+  color: #666;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1;
+  margin: 20px 0;
+  border-bottom: 1px solid #c5c5c5;
+  padding-bottom: 15px;
+}
+
+.gutter-top {
+  margin-top: 30px;
+}
+
+.floating-effect {
+  box-shadow: $floating-effect-shaddow;
+  border: 1px solid #d6cfcf;
+}
+
+.highcharts-container {
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+.react-bs-table-container {
+  margin-top: 30px !important;
+}

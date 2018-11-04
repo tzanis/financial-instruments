@@ -1,0 +1,39 @@
+.react-bs-table {
+  box-shadow: $floating-effect-shaddow;
+
+  &-container {
+    margin: 25px 0 200px;
+  }
+}
+
+.table {
+  border-radius: $border-radius;
+  background: #fff;
+
+  td,
+  th {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+}
+
+.react-bs-table-sizePerPage-dropdown {
+  .dropdown-toggle {
+    padding: 2px 10px;
+  }
+  .dropdown-item a {
+    display: block;
+    font-size: 13px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.table-striped {
+  tbody tr:nth-of-type(odd) {
+    background: $table-row-odd-bg;
+  }
+}
+

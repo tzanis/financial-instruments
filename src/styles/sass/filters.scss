@@ -1,0 +1,41 @@
+.filters-container {
+  display: flex;
+}
+
+.filters {
+  background-color: #fff;
+  flex: 1;
+  border-radius: $border-radius;
+
+  h2 {
+    font-size: 15px;
+    margin: 0 0 15px;
+    padding: 10px 15px;
+    background: #f3f3f3;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+
+  select {
+    height: 110px;
+
+    option{
+      font-size: 13px;
+    }
+  }
+
+  .form-group {
+    .col-6 {
+      &:first-child {
+        padding-right: 7px;
+      }
+      + .col-6 {
+        padding-left: 7px;
+      }
+    }
+  }
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
+  display: block;
+}
