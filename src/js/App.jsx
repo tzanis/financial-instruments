@@ -20,7 +20,6 @@ class App extends Component {
       },
     };
 
-    this.generateTableData = this.generateTableData.bind(this);
     this.setFilters = this.setFilters.bind(this);
     this.normalizeAndApplyFilters = this.normalizeAndApplyFilters.bind(this);
   }
@@ -41,31 +40,47 @@ class App extends Component {
     });
   }
 
+  /**
+   * Iterates trhough data, normalizes the values and
+   * applies value filters.
+   *
+   * @param  {Object} data Optional buildId override
+   * @returns {Array} Normalized data
+   */
+  normalizeValues(data) {
+    const {
+      minValue,
+      maxValue,
+    } = this.state.activeFilters;
+    const baseValue = data[0] ? data[0][1] : 0;
+    const noramalized = [];
+    data.forEach((entry) => {
+      // Calculate normalized price based on the value on the first date.
+      const normalizedValue = ( entry[1] / baseValue ) * 100;
+
+      // Check if value in filter range
+      if (
+        (!minValue || normalizedValue >= minValue)
+        && (!maxValue || normalizedValue <= maxValue)
+      ) {
+        noramalized.push([entry[0], normalizedValue]);
+      }
+    });
+
+    return noramalized;
+  }
+
+  /**
+   * Applies filters on normalized prices and updates the state with the result.
+   *
+   * @returns undefined
+   */
   normalizeAndApplyFilters() {
     const {
       startDate,
       endDate,
-      minValue,
-      maxValue,
       instruments: selectedInstruments,
     } = this.state.activeFilters;
-    const normalizeValues = (data) => {
-      const baseValue = data[0] ? data[0][1] : 0;
-      const noramalized = [];
-      data.forEach((entry) => {
-        const normalizedValue = ( entry[1] / baseValue ) * 100;
-
-        // Check if value in filter range
-        if (
-          (!minValue || normalizedValue >= minValue)
-          && (!maxValue || normalizedValue <= maxValue)
-        ) {
-          noramalized.push([entry[0], normalizedValue]);
-        }
-      });
-
-      return noramalized;
-    }
 
     const series = [];
 
@@ -85,7 +100,7 @@ class App extends Component {
 
       const _instrument = {
         name: `Instrument #${instrument.instrumentId}`,
-        data: _data && normalizeValues(_data),
+        data: _data && this.normalizeValues(_data),
       };
 
       if (
@@ -101,30 +116,6 @@ class App extends Component {
     this.setState({
       priceSeries: series,
     });
-  }
-
-  generateTableData() {
-    const { priceSeries } = this.state;
-    const _data = {};
-    priceSeries && priceSeries.forEach((series, idx) => {
-      series && series.data.forEach(sdata => {
-        if (!sdata) {
-          return;
-        }
-
-        if (sdata && typeof _data[sdata[0]] === 'undefined') {
-          _data[sdata[0]] = {};
-        }
-
-        _data[sdata[0]][idx] = {
-          name: series.name,
-          value: sdata[1],
-        };
-      });
-    });
-
-    const _arrayData = Object.keys(_data).map(date => ({ date, ..._data[date]}) );
-    return _arrayData;
   }
 
   render() {
@@ -154,7 +145,7 @@ class App extends Component {
         <div className="row">
           <div className="col-sm-12">
             { priceSeries && 
-              <PriceValuesTable data={this.generateTableData()} />
+              <PriceValuesTable data={priceSeries} />
             }
           </div>
         </div>
