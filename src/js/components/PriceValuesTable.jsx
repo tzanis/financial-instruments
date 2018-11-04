@@ -26,7 +26,6 @@ class PriceValuesTable extends Component {
       <BootstrapTable
         data={data}
         pagination
-        // pagination={ paginationConfig } 
         options={ tableOptions }
         striped
         hover

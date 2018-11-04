@@ -65,7 +65,6 @@ class Filters extends Component {
               </div>
             </div>
 
-
             <div className="form-group row">
               <div className="col-6">
                 <label>Min. Value</label>
@@ -125,7 +124,12 @@ class Filters extends Component {
             </div>
             
             <div className="form-group">
-              <button onClick={this.handleApplyFilters} className="btn btn-secondary btn-block">Apply</button>
+              <button
+                onClick={this.handleApplyFilters}
+                className="btn btn-secondary btn-block"
+              >
+                Apply
+              </button>
             </div>
           </form>
         </div>
